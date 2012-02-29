@@ -1,0 +1,18 @@
+<project name="map" default="package" basedir=".">
+
+	<target name="compile">
+		<javac includeantruntime="false" srcdir="src" destdir="bin">
+			<compilerarg value="-Xlint:unchecked"/>
+		</javac>
+	</target>
+	  
+	<target name="pc" depends="compile">
+		<jar basedir="bin"  includes="producerconsumer/**"  destfile="lib/pc.jar">
+			<manifest>
+				<attribute name="Main-Class" value="producerconsumer.Main"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="package" depends="pc"/>
+</project>
