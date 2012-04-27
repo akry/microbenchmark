@@ -14,8 +14,9 @@ public class Mediator {
 	}
 	
 	public boolean done() {
-		if(id >= upperCake)
+		if(id >= upperCake) {
 			return false;
+		}
 		return true;
 	}
 }

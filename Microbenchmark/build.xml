@@ -14,5 +14,13 @@
 		</jar>
 	</target>
 	
-	<target name="package" depends="pc"/>
+	<target name="busywait" depends="compile">
+		<jar basedir="bin"  includes="busywait/**"  destfile="lib/busywait.jar">
+			<manifest>
+				<attribute name="Main-Class" value="busywait.Main"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="package" depends="pc,busywait"/>
 </project>

@@ -18,11 +18,13 @@ public class Consumer extends Thread {
 		try {
 			while(true) {
 				String cake = table.take();
+				if(cake == null)
+					break;
 				Thread.sleep(random.nextInt(1000));
 			}
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println(getName()+" finished.");
+		System.out.println(getName()+" finished."+table.dumpCount());
 	}
 }

@@ -18,7 +18,7 @@ public class Producer extends Thread {
 	
 	public void run() {
 		try {
-			while(true) {
+			while(m.done()) {
 				Thread.sleep(random.nextInt(1000));
 				String cake = "[ Cake No. " +m.nextId()+ " by " +getName()+ " ]";
 				table.put(cake);
@@ -26,6 +26,6 @@ public class Producer extends Thread {
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println(getName()+" finished.");
+		System.out.println(getName()+" finished. "+table.dumpCount());
 	}
 }

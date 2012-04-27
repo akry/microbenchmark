@@ -13,7 +13,7 @@ public class Main {
 		
 		Mediator m = new Mediator(Integer.parseInt(System.getProperty("producerconsumer.limit")));
 		
-		Table table = new Table(t);
+		Table table = new Table(t,m);
 		for(int i=0; i<pros; i++)
 			new Producer("P"+i, table, System.currentTimeMillis(), m).start();
 		for(int j=0; j<cons; j++)

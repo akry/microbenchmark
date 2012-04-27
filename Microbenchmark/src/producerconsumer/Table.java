@@ -6,16 +6,20 @@ public class Table {
 	private int tail;
 	private int head;
 	private int count;
+	private final Mediator m;
 	
-	Table(int _count) {
+	Table(int _count, Mediator _m) {
 		buf = new String[_count];
 		head = 0;
 		tail = 0;
 		count = 0;
+		m=_m;
 	}
 	
 	public synchronized void put(String cake) throws InterruptedException {
+		
 		System.out.println(Thread.currentThread().getName()+" puts "+cake);
+		
 		while(count >= buf.length) {
 			wait();
 		}
@@ -26,7 +30,13 @@ public class Table {
 	}
 	
 	public synchronized String take() throws InterruptedException {
-		while (count <= 0) {
+		
+		if(!m.done() && count<=0) {
+			notifyAll();
+			return null;
+		}
+		
+		while (m.done() && count <= 0) {
 			wait();
 		}
 		String cake = buf[head];
@@ -35,5 +45,9 @@ public class Table {
 		notifyAll();
 		System.out.println(Thread.currentThread().getName()+" takes "+cake);
 		return cake;
+	}
+	
+	public int dumpCount() {
+		return count;
 	}
 }
